@@ -4,7 +4,7 @@ import type {
   DomainEncyclopedia,
   Candidate,
 } from "../core/contracts.js";
-import { relation } from "../core/knowledge.js";
+import { relation, canonical, fieldSources } from "../core/knowledge.js";
 export interface RetrievalOptions {
   maxDepth?: number;
   maxCandidates?: number;
@@ -84,10 +84,14 @@ export class StructuredRetriever implements CandidateRetriever {
           )
             continue;
           const p = [...node.path, { from: node.id, to: r.to, type: r.type }];
-          const effects = [
-            ...new Set([...node.effects, ...(r.materialEffects ?? [])]),
-          ];
+          // Consequences belong to the current edge, not every later neighbour.
+          // Unapproved relationships remain discoverable but cannot force selection.
+          const approved = canonical(
+            fieldSources(byId.get(node.id)!, "relationships"),
+          );
+          const effects = approved ? [...new Set(r.materialEffects ?? [])] : [];
           add(r.to, 60 / depth, "graph:" + r.type, depth, effects, [p]);
+          if (!approved) add(r.to, 60 / depth, "unapproved-edge", depth);
           if (!visited.has(r.to)) {
             visited.add(r.to);
             next.push({ id: r.to, path: p, effects });

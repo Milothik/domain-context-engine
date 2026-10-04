@@ -3,6 +3,48 @@ import assert from "node:assert/strict";
 import http from "node:http";
 import * as c from "../dist/index.js";
 import { options, read } from "../examples/run.mjs";
+test("material effects do not leak through unrelated downstream links", async () => {
+  const book = new c.MemoryEncyclopedia("edges", [
+    entity("root", {
+      relationships: [
+        { to: "place", type: "located-at", materialEffects: ["continuity"] },
+      ],
+    }),
+    entity("place", { relationships: ["noise"] }),
+    entity("noise"),
+  ]);
+  const candidates = await new c.StructuredRetriever().retrieve(task, book);
+  const decisions = await new c.DeterministicDecisionProvider().select({
+    task,
+    candidates,
+    currentState: { version: 0, facts: [] },
+  });
+  assert(decisions.find((d) => d.candidate === "place").selected);
+  assert.equal(decisions.find((d) => d.candidate === "noise").selected, false);
+});
+test("unapproved relationship effects cannot force deterministic selection", async () => {
+  const book = new c.MemoryEncyclopedia("edges", [
+    entity("root", {
+      relationships: [
+        { to: "noise", type: "located-at", materialEffects: ["continuity"] },
+      ],
+      fieldProvenance: { relationships: p("inferred") },
+    }),
+    entity("noise"),
+  ]);
+  const candidates = await new c.StructuredRetriever().retrieve(task, book);
+  assert(
+    candidates
+      .find((d) => d.entity["@id"] === "noise")
+      .signals.includes("unapproved-edge"),
+  );
+  const decisions = await new c.DeterministicDecisionProvider().select({
+    task,
+    candidates,
+    currentState: { version: 0, facts: [] },
+  });
+  assert.equal(decisions.find((d) => d.candidate === "noise").selected, false);
+});
 test("custom compiler cannot drop a selected task entity while keeping a valid envelope", async () => {
   const o = setup([entity("root")]);
   o.compiler = {
