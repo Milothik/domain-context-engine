@@ -1,5 +1,6 @@
 {
   "@context": {
+    "@vocab": "https://example.org/vocab/",
     "demo": "https://example.org/demo/",
     "brand": "https://example.org/brand/",
     "name": "https://schema.org/name",
@@ -9,8 +10,20 @@
     },
     "relationships": {
       "@id": "https://example.org/vocab/relationships",
-      "@type": "@id",
       "@container": "@set"
+    },
+    "to": {
+      "@id": "https://example.org/vocab/target",
+      "@type": "@id"
+    },
+    "type": "https://example.org/vocab/relationshipType",
+    "materialEffects": {
+      "@id": "https://example.org/vocab/materialEffects",
+      "@container": "@set"
+    },
+    "fieldProvenance": {
+      "@id": "https://example.org/vocab/fieldProvenance",
+      "@type": "@json"
     },
     "rules": {
       "@id": "https://example.org/vocab/rules",

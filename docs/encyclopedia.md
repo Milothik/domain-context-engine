@@ -1,3 +1,5 @@
 # encyclopedia
 
 Use domain-specific attributes and JSON-LD contexts, stable IDs and versioned snapshots. The base schema is an envelope, not a universal ontology. Validate each entity before MemoryEncyclopedia construction; it checks duplicate IDs and dangling relationships. Store claim-level source locators and hashes in production adapters. Keep uncertain claims and unresolved contradictions separate from approved canon. examples/jsonld-context.json is a mapping demonstration; use a JSON-LD processor if expansion/compaction is required.
+
+V2 includes self-contained encyclopedia.jsonld graphs in both example directories. The context maps typed relationship target IDs, relationship types and material effects; structured attributes/rules/provenance use JSON literals. scripts/export-examples.mjs regenerates these from the entity fixtures without resolving remote contexts. Legacy string relationships normalize to objects before JSON-LD export. Production ontologies should replace the synthetic example.org namespace and add semantic validation appropriate to the domain.

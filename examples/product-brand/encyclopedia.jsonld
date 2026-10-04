@@ -1,0 +1,117 @@
+{
+  "@context": {
+    "@vocab": "https://example.org/vocab/",
+    "demo": "https://example.org/demo/",
+    "brand": "https://example.org/brand/",
+    "name": "https://schema.org/name",
+    "attributes": {
+      "@id": "https://example.org/vocab/attributes",
+      "@type": "@json"
+    },
+    "relationships": {
+      "@id": "https://example.org/vocab/relationships",
+      "@container": "@set"
+    },
+    "to": {
+      "@id": "https://example.org/vocab/target",
+      "@type": "@id"
+    },
+    "type": "https://example.org/vocab/relationshipType",
+    "materialEffects": {
+      "@id": "https://example.org/vocab/materialEffects",
+      "@container": "@set"
+    },
+    "fieldProvenance": {
+      "@id": "https://example.org/vocab/fieldProvenance",
+      "@type": "@json"
+    },
+    "rules": {
+      "@id": "https://example.org/vocab/rules",
+      "@type": "@json"
+    },
+    "provenance": {
+      "@id": "https://example.org/vocab/provenance",
+      "@type": "@json"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "brand:cup",
+      "@type": "Product",
+      "name": "Cup",
+      "attributes": {
+        "material": "recycled steel"
+      },
+      "relationships": [
+        {
+          "to": "brand:voice",
+          "type": "governed-by",
+          "materialEffects": [
+            "style",
+            "constraints"
+          ]
+        }
+      ],
+      "rules": {
+        "mustPreserve": [
+          "Do not invent sustainability certifications"
+        ],
+        "mayVary": [],
+        "avoid": []
+      },
+      "provenance": [
+        {
+          "source": "synthetic-fixture-v1",
+          "type": "user-canon",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "@id": "brand:voice",
+      "@type": "BrandRule",
+      "name": "Brand voice",
+      "attributes": {
+        "tone": "plain and warm"
+      },
+      "relationships": [],
+      "rules": {
+        "mustPreserve": [
+          "Use plain language"
+        ],
+        "mayVary": [],
+        "avoid": [
+          "Unsupported performance claims"
+        ]
+      },
+      "provenance": [
+        {
+          "source": "synthetic-fixture-v1",
+          "type": "user-canon",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "@id": "brand:legacy",
+      "@type": "Campaign",
+      "name": "Legacy campaign",
+      "attributes": {
+        "slogan": "Historical only"
+      },
+      "relationships": [],
+      "rules": {
+        "mustPreserve": [],
+        "mayVary": [],
+        "avoid": []
+      },
+      "provenance": [
+        {
+          "source": "synthetic-fixture-v1",
+          "type": "user-canon",
+          "confidence": 1
+        }
+      ]
+    }
+  ]
+}
