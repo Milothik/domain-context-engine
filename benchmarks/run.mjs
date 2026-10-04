@@ -1,47 +1,23 @@
-import fs from "node:fs";
-import * as c from "../dist/index.js";
-import { options, read } from "../examples/run.mjs";
-const o = options(),
-  task = read("weirdway/task.json");
-const candidates = await o.retriever.retrieve(task, o.encyclopedia);
-const compiled = await c.run(o, task);
-const variants = {
-  rawPrompt: task.prompt,
-  encyclopediaDump: {
-    task,
-    entities: o.encyclopedia.all(),
-    state: await o.state.read(),
-  },
-  retrievalOnly: { task, entities: candidates.map((x) => x.entity) },
-  compiled: compiled.context,
-};
-const required = [
-  ...task.must,
-  ...task.mustNot,
-  ...compiled.context.entities.flatMap((e) => [
-    ...e.rules.mustPreserve,
-    ...e.rules.avoid,
-  ]),
-];
-const rows = Object.entries(variants).map(([variant, payload]) => {
-  const serialized = JSON.stringify(payload);
-  return {
-    variant,
-    contextBytes: Buffer.byteLength(serialized),
-    literalConstraintCoverage:
-      required.filter((x) => serialized.includes(x)).length / required.length,
-    irrelevantEntityMentions: serialized.includes("demo:bakery") ? 1 : 0,
-    entityConsistency: null,
-    continuity: null,
-    outputCorrectness: null,
-  };
-});
+import { cases, arms } from "./harness.mjs";
+import { scoreContext } from "./scoring.mjs";
+const rows = [];
+for (const fixture of cases)
+  for (const [arm, payload] of Object.entries(await arms(fixture)))
+    rows.push({
+      caseId: fixture.id,
+      arm,
+      contextBytes: Buffer.byteLength(JSON.stringify(payload)),
+      contextMetrics: scoreContext(payload, fixture.gold),
+    });
 console.log(
   JSON.stringify(
     {
-      fixture: "synthetic-weirdway-v1",
-      notes:
-        "Measured payload properties only. No model quality or superiority claims.",
+      version: "2",
+      mode: "offline-context-diagnostics",
+      annotationSource:
+        "manually authored gold in benchmarks/fixtures/cases.json",
+      limitations:
+        "Synthetic bounded fixtures. No model outputs or model superiority claim. Context metrics are distinct from output quality.",
       rows,
     },
     null,

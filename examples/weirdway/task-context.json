@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "task": {
     "id": "page-2",
     "prompt": "Yastrik waits at the Station. The Bakery is mentioned in passing.",
@@ -24,6 +24,95 @@
   },
   "entities": [
     {
+      "@id": "demo:station",
+      "@type": "Location",
+      "name": "Station",
+      "attributes": {
+        "lighting": "blue dusk"
+      },
+      "relationships": [
+        {
+          "to": "demo:grammar",
+          "type": "governed-by",
+          "materialEffects": [
+            "constraints"
+          ]
+        }
+      ],
+      "rules": {
+        "mustPreserve": [
+          "Station sign remains legible"
+        ],
+        "mayVary": [],
+        "avoid": []
+      },
+      "provenance": [
+        {
+          "source": "synthetic-fixture-v1",
+          "type": "user-canon",
+          "confidence": 1
+        }
+      ],
+      "fieldProvenance": {
+        "lighting": [
+          {
+            "source": "synthetic-fixture-v1",
+            "type": "user-canon",
+            "confidence": 1
+          }
+        ]
+      }
+    },
+    {
+      "@id": "demo:yastrik",
+      "@type": "Character",
+      "name": "Yastrik",
+      "attributes": {
+        "coat": "yellow",
+        "silhouette": "angular"
+      },
+      "relationships": [
+        {
+          "to": "demo:station",
+          "type": "located-at",
+          "materialEffects": [
+            "continuity",
+            "visual-representation"
+          ]
+        }
+      ],
+      "rules": {
+        "mustPreserve": [
+          "Yastrik wears a yellow coat"
+        ],
+        "mayVary": [],
+        "avoid": []
+      },
+      "provenance": [
+        {
+          "source": "synthetic-fixture-v1",
+          "type": "user-canon",
+          "confidence": 1
+        }
+      ],
+      "fieldProvenance": {
+        "coat": [
+          {
+            "source": "synthetic-fixture-v1",
+            "type": "user-canon",
+            "confidence": 1
+          }
+        ],
+        "silhouette": [
+          {
+            "source": "synthetic-fixture-v1",
+            "type": "user-canon",
+            "confidence": 1
+          }
+        ]
+      }
+    },
+    {
       "@id": "demo:grammar",
       "@type": "ComicGrammar",
       "name": "Comic grammar",
@@ -45,74 +134,81 @@
           "type": "user-canon",
           "confidence": 1
         }
-      ]
-    },
-    {
-      "@id": "demo:station",
-      "@type": "Location",
-      "name": "Station",
-      "attributes": {
-        "lighting": "blue dusk"
-      },
-      "relationships": [],
-      "rules": {
-        "mustPreserve": [
-          "Station sign remains legible"
-        ],
-        "mayVary": [],
-        "avoid": []
-      },
-      "provenance": [
-        {
-          "source": "synthetic-fixture-v1",
-          "type": "user-canon",
-          "confidence": 1
-        }
-      ]
-    },
-    {
-      "@id": "demo:yastrik",
-      "@type": "Character",
-      "name": "Yastrik",
-      "attributes": {
-        "coat": "yellow",
-        "silhouette": "angular"
-      },
-      "relationships": [
-        "demo:station"
       ],
-      "rules": {
-        "mustPreserve": [
-          "Yastrik wears a yellow coat"
+      "fieldProvenance": {
+        "panels": [
+          {
+            "source": "synthetic-fixture-v1",
+            "type": "user-canon",
+            "confidence": 1
+          }
         ],
-        "mayVary": [],
-        "avoid": []
-      },
-      "provenance": [
-        {
-          "source": "synthetic-fixture-v1",
-          "type": "user-canon",
-          "confidence": 1
-        }
-      ]
+        "readingOrder": [
+          {
+            "source": "synthetic-fixture-v1",
+            "type": "user-canon",
+            "confidence": 1
+          }
+        ]
+      }
     }
   ],
   "constraints": {
     "must": [
       "Preserve the left sleeve tear from page 1",
       "Station sign remains legible",
-      "Three panels; left-to-right reading",
-      "Yastrik wears a yellow coat"
+      "Yastrik wears a yellow coat",
+      "Three panels; left-to-right reading"
     ],
     "mustNot": [
       "No new injury"
     ],
     "may": []
   },
+  "constraintDetails": [
+    {
+      "text": "Preserve the left sleeve tear from page 1",
+      "kind": "must",
+      "source": "task:page-2",
+      "priority": 1
+    },
+    {
+      "text": "No new injury",
+      "kind": "mustNot",
+      "source": "task:page-2",
+      "priority": 1
+    },
+    {
+      "text": "Station sign remains legible",
+      "kind": "must",
+      "source": "demo:station",
+      "priority": 2
+    },
+    {
+      "text": "Yastrik wears a yellow coat",
+      "kind": "must",
+      "source": "demo:yastrik",
+      "priority": 2
+    },
+    {
+      "text": "Three panels; left-to-right reading",
+      "kind": "must",
+      "source": "demo:grammar",
+      "priority": 2
+    }
+  ],
+  "knowledgeWarnings": [],
+  "omittedEntityIds": [],
   "relationships": [
     {
+      "from": "demo:station",
+      "to": "demo:grammar",
+      "type": "governed-by"
+    },
+    {
       "from": "demo:yastrik",
-      "to": "demo:station"
+      "to": "demo:station",
+      "type": "located-at"
     }
   ],
   "continuity": [
@@ -128,7 +224,23 @@
           "type": "user-canon",
           "confidence": 1
         }
-      ]
+      ],
+      "fieldProvenance": {
+        "leftSleeve": [
+          {
+            "source": "approved-page-1",
+            "type": "user-canon",
+            "confidence": 1
+          }
+        ],
+        "location": [
+          {
+            "source": "approved-page-1",
+            "type": "user-canon",
+            "confidence": 1
+          }
+        ]
+      }
     }
   ],
   "outputRequirements": {

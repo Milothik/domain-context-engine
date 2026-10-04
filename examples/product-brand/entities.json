@@ -7,7 +7,14 @@
       "material": "recycled steel"
     },
     "relationships": [
-      "brand:voice"
+      {
+        "to": "brand:voice",
+        "type": "governed-by",
+        "materialEffects": [
+          "style",
+          "constraints"
+        ]
+      }
     ],
     "rules": {
       "mustPreserve": [

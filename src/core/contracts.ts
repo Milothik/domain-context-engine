@@ -11,12 +11,30 @@ export interface Provenance {
   confidence: number;
   locator?: string;
 }
+export interface Relationship {
+  to: string;
+  type: string;
+  materialEffects?: string[];
+}
+export interface ConstraintDetail {
+  text: string;
+  kind: "must" | "mustNot" | "may";
+  source: string;
+  priority: number;
+}
+export interface KnowledgeWarning {
+  entityId: string;
+  field: string;
+  reason: string;
+  provenance: Provenance[];
+}
 export interface Entity {
   "@id": string;
   "@type": string;
   name: string;
   attributes: Record<string, Json>;
-  relationships: string[];
+  relationships: (string | Relationship)[];
+  fieldProvenance?: Record<string, Provenance[]>;
   rules: { mustPreserve: string[]; mayVary: string[]; avoid: string[] };
   provenance: Provenance[];
 }
@@ -37,6 +55,7 @@ export interface Overrides {
   outputRequirements?: Record<string, Json>;
 }
 export interface StateFact {
+  fieldProvenance?: Record<string, Provenance[]>;
   entityId: string;
   value: Record<string, Json>;
   provenance: Provenance[];
@@ -48,6 +67,10 @@ export interface State {
 export interface Candidate {
   entity: Entity;
   signals: string[];
+  score?: number;
+  depth?: number;
+  materialEffects?: string[];
+  paths?: { from: string; to: string; type: string }[][];
 }
 export interface Decision {
   candidate: string;
@@ -58,11 +81,14 @@ export interface Decision {
   evidence?: Json;
 }
 export interface TaskContext {
-  schemaVersion: "1.0";
+  schemaVersion: "1.0" | "2.0";
+  constraintDetails?: ConstraintDetail[];
+  knowledgeWarnings?: KnowledgeWarning[];
+  omittedEntityIds?: string[];
   task: Task;
   entities: Entity[];
   constraints: { must: string[]; mustNot: string[]; may: string[] };
-  relationships: { from: string; to: string }[];
+  relationships: { from: string; to: string; type?: string }[];
   continuity: StateFact[];
   outputRequirements: Record<string, Json>;
 }
@@ -88,6 +114,8 @@ export interface ContextCompiler {
     selected: Entity[];
     currentState: State;
     overrides: Overrides;
+    decisions?: Decision[];
+    maxContextBytes?: number;
   }): Promise<TaskContext>;
 }
 export interface GenerationProvider {

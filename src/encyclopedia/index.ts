@@ -1,4 +1,6 @@
 import type { DomainEncyclopedia, Entity } from "../core/contracts.js";
+import { validateEntity } from "../core/validation.js";
+import { relation } from "../core/knowledge.js";
 export class MemoryEncyclopedia implements DomainEncyclopedia {
   private entries: Map<string, Entity>;
   constructor(
@@ -7,13 +9,15 @@ export class MemoryEncyclopedia implements DomainEncyclopedia {
   ) {
     this.entries = new Map();
     for (const e of entities) {
+      validateEntity(e);
       if (this.entries.has(e["@id"]))
         throw Error("Duplicate entity " + e["@id"]);
       this.entries.set(e["@id"], structuredClone(e));
     }
     for (const e of entities)
-      for (const id of e.relationships)
-        if (!this.entries.has(id)) throw Error("Unresolved relationship " + id);
+      for (const link of e.relationships)
+        if (!this.entries.has(relation(link).to))
+          throw Error("Unresolved relationship " + relation(link).to);
   }
   all() {
     return structuredClone([...this.entries.values()]);

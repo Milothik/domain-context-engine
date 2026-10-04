@@ -41,3 +41,8 @@ Run npm ci, npm test and npm run benchmark. Extend tests for domain schema, cont
 ## Phase 9 — Validate with user
 
 Show a concrete sample context, selection trace, output and provenance. Ask about unresolved material ambiguities and the sample's domain correctness. Document decisions, limitations and deployment gates. This reference uses MIT; verify separate rights for supplied project materials and do not license proprietary sources implicitly.
+
+
+## V2 implementation gates
+
+Read docs/migration-v2.md before adapting old data. Prefer typed links with reviewed material effects and claim-level fieldProvenance. Core validation is always active; ProjectAdapter adds domain correctness. Use independent gold annotations and test corrupted outputs, not only successful examples. A live LLM evaluation requires explicit endpoint/model/credentials and ALLOW_LIVE_EVAL=1; no remote quality claim follows from local transport tests. Treat StateCommitError as a reconciliation task, not an instruction to regenerate.

@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.0",
+  "schemaVersion": "2.0",
   "task": {
     "id": "product-copy",
     "prompt": "Write Cup product copy with Brand voice.",
@@ -29,7 +29,14 @@
         "material": "recycled steel"
       },
       "relationships": [
-        "brand:voice"
+        {
+          "to": "brand:voice",
+          "type": "governed-by",
+          "materialEffects": [
+            "style",
+            "constraints"
+          ]
+        }
       ],
       "rules": {
         "mustPreserve": [
@@ -44,7 +51,16 @@
           "type": "user-canon",
           "confidence": 1
         }
-      ]
+      ],
+      "fieldProvenance": {
+        "material": [
+          {
+            "source": "synthetic-fixture-v1",
+            "type": "user-canon",
+            "confidence": 1
+          }
+        ]
+      }
     },
     {
       "@id": "brand:voice",
@@ -69,7 +85,16 @@
           "type": "user-canon",
           "confidence": 1
         }
-      ]
+      ],
+      "fieldProvenance": {
+        "tone": [
+          {
+            "source": "synthetic-fixture-v1",
+            "type": "user-canon",
+            "confidence": 1
+          }
+        ]
+      }
     }
   ],
   "constraints": {
@@ -84,10 +109,45 @@
     ],
     "may": []
   },
+  "constraintDetails": [
+    {
+      "text": "Describe recycled steel",
+      "kind": "must",
+      "source": "task:product-copy",
+      "priority": 1
+    },
+    {
+      "text": "No unsupported certification",
+      "kind": "mustNot",
+      "source": "task:product-copy",
+      "priority": 1
+    },
+    {
+      "text": "Do not invent sustainability certifications",
+      "kind": "must",
+      "source": "brand:cup",
+      "priority": 2
+    },
+    {
+      "text": "Use plain language",
+      "kind": "must",
+      "source": "brand:voice",
+      "priority": 2
+    },
+    {
+      "text": "Unsupported performance claims",
+      "kind": "mustNot",
+      "source": "brand:voice",
+      "priority": 2
+    }
+  ],
+  "knowledgeWarnings": [],
+  "omittedEntityIds": [],
   "relationships": [
     {
       "from": "brand:cup",
-      "to": "brand:voice"
+      "to": "brand:voice",
+      "type": "governed-by"
     }
   ],
   "continuity": [],

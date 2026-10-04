@@ -1,21 +1,23 @@
-# Architecture
+# Architecture v2
 
-## Boundaries
+Raw sources → agent ingestion → versioned Domain Encyclopedia → ranked Candidate Discovery → consequence-based DecisionProvider → provenance-aware ContextCompiler → core validation → GenerationProvider → OutputAdapter → domain output validation → state patches → version-checked StateStore.
 
-Raw materials → agent ingestion → versioned Domain Encyclopedia → CandidateRetriever → DecisionProvider → ContextCompiler → validated Task Context → GenerationProvider → OutputAdapter → output validation → approved state derivation → StateStore.
+## Improvements over v1
 
-DomainEncyclopedia owns IDs and provenance. CandidateRetriever finds possibilities, never promises relevance. DecisionProvider must return one inspectable decision per candidate. ContextCompiler projects selected facts into the domain's task envelope. GenerationProvider is vendor independent. OutputAdapter shapes text, image, video, code, document, game asset or multimodal results. ProjectAdapter validates domain facts and derives approved state. StateStore uses optimistic version checks.
+The original decision strategy ignored discovered associations, state replacement could lose fields, and schemas were applied only by the examples. V2 moves validation into the engine and encyclopedia, adds typed graph signals, and merges continuity updates. Transport-backed LLM decisions have an explicit protocol and limits rather than requiring an unimplemented callback.
 
-## Debt and scalability risks
+Encyclopedia IDs resolve to authoritative entities after retrieval; a retriever cannot change canon by returning modified attributes. Discovery uses lexical coverage and bounded breadth-first graph traversal, records paths and effects, and sorts by score and stable ID. Decision remains separate: task seeds, required types and graph edges with declared material consequences are selected by the deterministic policy. Untyped legacy links do not imply necessity.
 
-The reference encyclopedia scans memory and clones JSON; use indexed immutable revisions and bounded graph/lexical retrieval at scale. The compiler carries complete selected attributes: a production domain compiler must project fields and estimate model tokens. Byte budgets fail closed and never silently discard constraints. Memory state is process local, with no durable run ledger; use transactional storage, idempotency keys and an outbox for external generation effects. A failed state commit may occur after generation: retain the output and reconcile rather than blindly generating again. Providers need timeouts, bounded retries, cancellation, redaction, usage budgets and validated evidence. Confidence cannot establish scientific validity.
+The compiler approves fields according to provenance policy (default: user-canon only), records withheld claims, preserves constraint source and priority, detects opposite exact predicates, and drops only optional entities under a byte budget. Confidence/effect count orders optional omissions and never overrides mandatory constraints or human locks. Core validation catches malformed custom compiler output, constraint loss and override violations.
 
-## Decisions
+State patches recursively merge object keys; scalars, arrays and null replace their field. Per-field provenance distinguishes untouched data from generated patches; nested merges conservatively combine sources. A whole batch validates before mutation. Version conflicts prevent lost writes. StateCommitError carries the validated output/context if a commit fails, allowing recovery without automatic regeneration.
 
-TypeScript keeps contracts explicit; Ajv validates JSON Schema; no agent framework or provider SDK is required. Deterministic reference behavior is easy to reproduce. Preserve source locators, source snapshots/hashes, ontology revisions, provider/model revisions and compiler revisions in production run manifests. The demo records encyclopedia, provider and state versions, but does not implement a complete archival manifest.
+## Remaining scalability and production work
 
-Human include/exclude and field locks override automatic selection; contradictory human requests fail with a specific error. Additive rule overrides avoid silently removing canon. Intentional canon replacement belongs in a reviewed encyclopedia revision; output requirements are replaceable per task. Every generated output is untrusted until ProjectAdapter validation and review policy allow state derivation.
+MemoryEncyclopedia scans and clones data; ranked retrieval is not an indexed search backend. Breadth-first traversal has bounded depth, per-candidate paths and returned candidate count, but densely connected graphs can still require large work before trimming. Replace with a bounded indexed graph/lexical/vector backend for large corpora. The compiler keeps full approved fields of retained entities: domain projections and model token budgets remain necessary. Byte budgeting is exact JSON UTF-8 size, not model tokens.
 
-## Repository responsibilities
+State remains in-memory and process-local. Durable deployments need transactions, idempotency ledgers, an outbox, tenant authorization and retention. StateCommitError preserves a result in the current process, not after a crash. No automatic HTTP retry is performed, preventing hidden duplicate API costs; transport failures require explicit retry policy. LLM output validation establishes contract conformance, not truth or prompt-injection immunity. Domain output validation and human review remain required for canon updates.
 
-src/ is minimal framework code; schemas/ contains exchange envelopes; docs/ teaches implementation; examples/ contains invented fixtures and executable adaptations; templates/ provides starting points; tests/ checks architecture; benchmarks/ measures payloads without invented model results. No raw private material is included.
+## Compatibility and scientific traceability
+
+Contracts remain provider independent. Structured JSON and legacy links adapt to typed relations; no universal ontology is imposed. Generated runtime schemas are synchronized from schemas/ during build. Traces record provider, encyclopedia, state, context version, decisions, overrides, omissions and withheld knowledge. Source hashes and claim-level provenance must be supplied by ingestion; the engine does not fabricate source evidence. Evaluation gold is independently authored and never derived from compiled output. Synthetic context checks cannot establish model superiority.

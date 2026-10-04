@@ -1,4 +1,225 @@
-{
+export const entitySchema = {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "entity",
+  "type": "object",
+  "required": [
+    "@id",
+    "@type",
+    "name",
+    "attributes",
+    "relationships",
+    "rules",
+    "provenance"
+  ],
+  "properties": {
+    "@id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "@type": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attributes": {
+      "type": "object"
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "type": "object",
+            "required": [
+              "to",
+              "type"
+            ],
+            "properties": {
+              "to": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "type": "string",
+                "minLength": 1
+              },
+              "materialEffects": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      }
+    },
+    "rules": {
+      "type": "object",
+      "required": [
+        "mustPreserve",
+        "mayVary",
+        "avoid"
+      ],
+      "properties": {
+        "mustPreserve": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mayVary": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "avoid": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "source",
+          "type",
+          "confidence"
+        ],
+        "properties": {
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "user-canon",
+              "inferred",
+              "generated",
+              "external",
+              "uncertain"
+            ]
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "locator": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "fieldProvenance": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "required": [
+            "source",
+            "type",
+            "confidence"
+          ],
+          "properties": {
+            "source": {
+              "type": "string",
+              "minLength": 1
+            },
+            "type": {
+              "enum": [
+                "user-canon",
+                "inferred",
+                "generated",
+                "external",
+                "uncertain"
+              ]
+            },
+            "confidence": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "locator": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+} as const;
+export const taskSchema = {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "task",
+  "type": "object",
+  "required": [
+    "id",
+    "prompt",
+    "entityIds",
+    "tags",
+    "must",
+    "mustNot",
+    "outputRequirements"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "entityIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "must": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "mustNot": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "outputRequirements": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+} as const;
+export const contextSchema = {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "task-context",
   "type": "object",
@@ -518,4 +739,202 @@
       }
     }
   ]
-}
+} as const;
+export const decisionsSchema = {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "decision-result",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [
+      "candidate",
+      "selected",
+      "reason",
+      "materialEffects",
+      "confidence"
+    ],
+    "properties": {
+      "candidate": {
+        "type": "string"
+      },
+      "selected": {
+        "type": "boolean"
+      },
+      "reason": {
+        "type": "string",
+        "minLength": 1
+      },
+      "materialEffects": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "confidence": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 1
+      },
+      "evidence": {}
+    },
+    "additionalProperties": false
+  }
+} as const;
+export const stateSchema = {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "version",
+    "facts"
+  ],
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "entityId",
+          "value",
+          "provenance"
+        ],
+        "properties": {
+          "entityId": {
+            "type": "string"
+          },
+          "value": {
+            "type": "object"
+          },
+          "provenance": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "source",
+                "type",
+                "confidence"
+              ],
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "type": {
+                  "enum": [
+                    "user-canon",
+                    "inferred",
+                    "generated",
+                    "external",
+                    "uncertain"
+                  ]
+                },
+                "confidence": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1
+                },
+                "locator": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "fieldProvenance": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": [
+                  "source",
+                  "type",
+                  "confidence"
+                ],
+                "properties": {
+                  "source": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "type": {
+                    "enum": [
+                      "user-canon",
+                      "inferred",
+                      "generated",
+                      "external",
+                      "uncertain"
+                    ]
+                  },
+                  "confidence": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 1
+                  },
+                  "locator": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+} as const;
+export const overridesSchema = {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "include": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "exclude": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "locks": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "rules": {
+      "type": "object",
+      "properties": {
+        "must": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "mustNot": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "outputRequirements": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+} as const;

@@ -8,7 +8,14 @@
       "silhouette": "angular"
     },
     "relationships": [
-      "demo:station"
+      {
+        "to": "demo:station",
+        "type": "located-at",
+        "materialEffects": [
+          "continuity",
+          "visual-representation"
+        ]
+      }
     ],
     "rules": {
       "mustPreserve": [
@@ -32,7 +39,15 @@
     "attributes": {
       "lighting": "blue dusk"
     },
-    "relationships": [],
+    "relationships": [
+      {
+        "to": "demo:grammar",
+        "type": "governed-by",
+        "materialEffects": [
+          "constraints"
+        ]
+      }
+    ],
     "rules": {
       "mustPreserve": [
         "Station sign remains legible"

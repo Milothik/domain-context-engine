@@ -1,72 +1,78 @@
 {
   "encyclopediaRevision": "synthetic-v1",
   "taskId": "page-2",
-  "decisionProvider": "deterministic-v1",
+  "decisionProvider": "deterministic-v2",
   "generationProvider": "offline-preview",
   "stateVersion": 1,
   "overrides": {},
   "decisions": [
     {
-      "candidate": "demo:bakery",
-      "selected": false,
-      "reason": "Discovered association has no explicit material effect under this policy.",
-      "materialEffects": [],
-      "confidence": 1,
-      "evidence": {
-        "signals": [
-          "lexical-or-type"
-        ],
-        "policy": "deterministic-v1"
-      }
-    },
-    {
-      "candidate": "demo:grammar",
-      "selected": true,
-      "reason": "Explicit task ID or required entity type.",
-      "materialEffects": [
-        "identity",
-        "constraints"
-      ],
-      "confidence": 1,
-      "evidence": {
-        "signals": [
-          "lexical-or-type"
-        ],
-        "policy": "deterministic-v1"
-      }
-    },
-    {
       "candidate": "demo:station",
       "selected": true,
-      "reason": "Explicit task ID or required entity type.",
+      "reason": "Task seed, required type, or typed relationship with declared material consequences.",
       "materialEffects": [
         "identity",
-        "constraints"
+        "continuity",
+        "visual-representation"
       ],
       "confidence": 1,
       "evidence": {
         "signals": [
-          "explicit-id"
+          "explicit-id",
+          "lexical",
+          "graph:located-at"
         ],
-        "policy": "deterministic-v1"
+        "policy": "deterministic-v2"
       }
     },
     {
       "candidate": "demo:yastrik",
       "selected": true,
-      "reason": "Explicit task ID or required entity type.",
+      "reason": "Task seed, required type, or typed relationship with declared material consequences.",
       "materialEffects": [
-        "identity",
+        "identity"
+      ],
+      "confidence": 1,
+      "evidence": {
+        "signals": [
+          "explicit-id",
+          "lexical"
+        ],
+        "policy": "deterministic-v2"
+      }
+    },
+    {
+      "candidate": "demo:grammar",
+      "selected": true,
+      "reason": "Task seed, required type, or typed relationship with declared material consequences.",
+      "materialEffects": [
         "constraints"
       ],
       "confidence": 1,
       "evidence": {
         "signals": [
-          "explicit-id"
+          "required-type",
+          "graph:governed-by"
         ],
-        "policy": "deterministic-v1"
+        "policy": "deterministic-v2"
+      }
+    },
+    {
+      "candidate": "demo:bakery",
+      "selected": false,
+      "reason": "Lexical similarity or an untyped association alone does not establish material effect.",
+      "materialEffects": [],
+      "confidence": 0.5,
+      "evidence": {
+        "signals": [
+          "lexical"
+        ],
+        "policy": "deterministic-v2"
       }
     }
   ],
-  "contextBytes": 1798
+  "compilerVersion": "2.0",
+  "omittedEntityIds": [],
+  "knowledgeWarnings": [],
+  "contextBytes": 3216
 }

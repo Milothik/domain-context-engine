@@ -6,3 +6,6 @@ export * from "./decisions/index.js";
 export * from "./compiler/index.js";
 export * from "./state/index.js";
 export * from "./adapters/index.js";
+
+export * from "./core/validation.js";
+export * from "./core/knowledge.js";

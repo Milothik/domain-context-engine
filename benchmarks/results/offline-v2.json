@@ -1,0 +1,176 @@
+{
+  "version": "2",
+  "mode": "offline-context-diagnostics",
+  "annotationSource": "manually authored gold in benchmarks/fixtures/cases.json",
+  "limitations": "Synthetic bounded fixtures. No model outputs or model superiority claim. Context metrics are distinct from output quality.",
+  "rows": [
+    {
+      "caseId": "comic-typed-graph",
+      "arm": "rawPrompt",
+      "contextBytes": 262,
+      "contextMetrics": {
+        "entityRecall": 0,
+        "entityPrecision": 1,
+        "constraintRecall": 0.4,
+        "factAccuracy": 0,
+        "continuityAccuracy": 0,
+        "irrelevantEntities": 0,
+        "irrelevantStateEntities": 0
+      }
+    },
+    {
+      "caseId": "comic-typed-graph",
+      "arm": "encyclopediaDump",
+      "contextBytes": 72483,
+      "contextMetrics": {
+        "entityRecall": 1,
+        "entityPrecision": 0.10714285714285714,
+        "constraintRecall": 1,
+        "factAccuracy": 1,
+        "continuityAccuracy": 1,
+        "irrelevantEntities": 25,
+        "irrelevantStateEntities": 1
+      }
+    },
+    {
+      "caseId": "comic-typed-graph",
+      "arm": "retrievalOnly",
+      "contextBytes": 1879,
+      "contextMetrics": {
+        "entityRecall": 1,
+        "entityPrecision": 0.75,
+        "constraintRecall": 1,
+        "factAccuracy": 1,
+        "continuityAccuracy": 1,
+        "irrelevantEntities": 1,
+        "irrelevantStateEntities": 1
+      }
+    },
+    {
+      "caseId": "comic-typed-graph",
+      "arm": "compiled",
+      "contextBytes": 2748,
+      "contextMetrics": {
+        "entityRecall": 1,
+        "entityPrecision": 1,
+        "constraintRecall": 1,
+        "factAccuracy": 1,
+        "continuityAccuracy": 1,
+        "irrelevantEntities": 0,
+        "irrelevantStateEntities": 0
+      }
+    },
+    {
+      "caseId": "brand-policy",
+      "arm": "rawPrompt",
+      "contextBytes": 280,
+      "contextMetrics": {
+        "entityRecall": 0,
+        "entityPrecision": 1,
+        "constraintRecall": 0.5,
+        "factAccuracy": 0,
+        "continuityAccuracy": 1,
+        "irrelevantEntities": 0,
+        "irrelevantStateEntities": 0
+      }
+    },
+    {
+      "caseId": "brand-policy",
+      "arm": "encyclopediaDump",
+      "contextBytes": 71852,
+      "contextMetrics": {
+        "entityRecall": 1,
+        "entityPrecision": 0.07407407407407407,
+        "constraintRecall": 1,
+        "factAccuracy": 1,
+        "continuityAccuracy": 1,
+        "irrelevantEntities": 25,
+        "irrelevantStateEntities": 0
+      }
+    },
+    {
+      "caseId": "brand-policy",
+      "arm": "retrievalOnly",
+      "contextBytes": 1248,
+      "contextMetrics": {
+        "entityRecall": 1,
+        "entityPrecision": 0.6666666666666666,
+        "constraintRecall": 1,
+        "factAccuracy": 1,
+        "continuityAccuracy": 1,
+        "irrelevantEntities": 1,
+        "irrelevantStateEntities": 0
+      }
+    },
+    {
+      "caseId": "brand-policy",
+      "arm": "compiled",
+      "contextBytes": 1915,
+      "contextMetrics": {
+        "entityRecall": 1,
+        "entityPrecision": 1,
+        "constraintRecall": 1,
+        "factAccuracy": 1,
+        "continuityAccuracy": 1,
+        "irrelevantEntities": 0,
+        "irrelevantStateEntities": 0
+      }
+    },
+    {
+      "caseId": "game-continuity",
+      "arm": "rawPrompt",
+      "contextBytes": 258,
+      "contextMetrics": {
+        "entityRecall": 0,
+        "entityPrecision": 1,
+        "constraintRecall": 0.5,
+        "factAccuracy": 0,
+        "continuityAccuracy": 0,
+        "irrelevantEntities": 0,
+        "irrelevantStateEntities": 0
+      }
+    },
+    {
+      "caseId": "game-continuity",
+      "arm": "encyclopediaDump",
+      "contextBytes": 72103,
+      "contextMetrics": {
+        "entityRecall": 1,
+        "entityPrecision": 0.07407407407407407,
+        "constraintRecall": 1,
+        "factAccuracy": 1,
+        "continuityAccuracy": 1,
+        "irrelevantEntities": 25,
+        "irrelevantStateEntities": 1
+      }
+    },
+    {
+      "caseId": "game-continuity",
+      "arm": "retrievalOnly",
+      "contextBytes": 1499,
+      "contextMetrics": {
+        "entityRecall": 1,
+        "entityPrecision": 0.6666666666666666,
+        "constraintRecall": 1,
+        "factAccuracy": 1,
+        "continuityAccuracy": 1,
+        "irrelevantEntities": 1,
+        "irrelevantStateEntities": 1
+      }
+    },
+    {
+      "caseId": "game-continuity",
+      "arm": "compiled",
+      "contextBytes": 1894,
+      "contextMetrics": {
+        "entityRecall": 1,
+        "entityPrecision": 1,
+        "constraintRecall": 1,
+        "factAccuracy": 1,
+        "continuityAccuracy": 1,
+        "irrelevantEntities": 0,
+        "irrelevantStateEntities": 0
+      }
+    }
+  ]
+}
