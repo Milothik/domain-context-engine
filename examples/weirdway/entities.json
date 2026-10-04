@@ -1,0 +1,96 @@
+[
+  {
+    "@id": "demo:yastrik",
+    "@type": "Character",
+    "name": "Yastrik",
+    "attributes": {
+      "coat": "yellow",
+      "silhouette": "angular"
+    },
+    "relationships": [
+      "demo:station"
+    ],
+    "rules": {
+      "mustPreserve": [
+        "Yastrik wears a yellow coat"
+      ],
+      "mayVary": [],
+      "avoid": []
+    },
+    "provenance": [
+      {
+        "source": "synthetic-fixture-v1",
+        "type": "user-canon",
+        "confidence": 1
+      }
+    ]
+  },
+  {
+    "@id": "demo:station",
+    "@type": "Location",
+    "name": "Station",
+    "attributes": {
+      "lighting": "blue dusk"
+    },
+    "relationships": [],
+    "rules": {
+      "mustPreserve": [
+        "Station sign remains legible"
+      ],
+      "mayVary": [],
+      "avoid": []
+    },
+    "provenance": [
+      {
+        "source": "synthetic-fixture-v1",
+        "type": "user-canon",
+        "confidence": 1
+      }
+    ]
+  },
+  {
+    "@id": "demo:grammar",
+    "@type": "ComicGrammar",
+    "name": "Comic grammar",
+    "attributes": {
+      "panels": 3,
+      "readingOrder": "left-to-right"
+    },
+    "relationships": [],
+    "rules": {
+      "mustPreserve": [
+        "Three panels; left-to-right reading"
+      ],
+      "mayVary": [],
+      "avoid": []
+    },
+    "provenance": [
+      {
+        "source": "synthetic-fixture-v1",
+        "type": "user-canon",
+        "confidence": 1
+      }
+    ]
+  },
+  {
+    "@id": "demo:bakery",
+    "@type": "Location",
+    "name": "Bakery",
+    "attributes": {
+      "color": "pink"
+    },
+    "relationships": [],
+    "rules": {
+      "mustPreserve": [],
+      "mayVary": [],
+      "avoid": []
+    },
+    "provenance": [
+      {
+        "source": "synthetic-fixture-v1",
+        "type": "user-canon",
+        "confidence": 1
+      }
+    ]
+  }
+]

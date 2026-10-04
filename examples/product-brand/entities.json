@@ -1,0 +1,73 @@
+[
+  {
+    "@id": "brand:cup",
+    "@type": "Product",
+    "name": "Cup",
+    "attributes": {
+      "material": "recycled steel"
+    },
+    "relationships": [
+      "brand:voice"
+    ],
+    "rules": {
+      "mustPreserve": [
+        "Do not invent sustainability certifications"
+      ],
+      "mayVary": [],
+      "avoid": []
+    },
+    "provenance": [
+      {
+        "source": "synthetic-fixture-v1",
+        "type": "user-canon",
+        "confidence": 1
+      }
+    ]
+  },
+  {
+    "@id": "brand:voice",
+    "@type": "BrandRule",
+    "name": "Brand voice",
+    "attributes": {
+      "tone": "plain and warm"
+    },
+    "relationships": [],
+    "rules": {
+      "mustPreserve": [
+        "Use plain language"
+      ],
+      "mayVary": [],
+      "avoid": [
+        "Unsupported performance claims"
+      ]
+    },
+    "provenance": [
+      {
+        "source": "synthetic-fixture-v1",
+        "type": "user-canon",
+        "confidence": 1
+      }
+    ]
+  },
+  {
+    "@id": "brand:legacy",
+    "@type": "Campaign",
+    "name": "Legacy campaign",
+    "attributes": {
+      "slogan": "Historical only"
+    },
+    "relationships": [],
+    "rules": {
+      "mustPreserve": [],
+      "mayVary": [],
+      "avoid": []
+    },
+    "provenance": [
+      {
+        "source": "synthetic-fixture-v1",
+        "type": "user-canon",
+        "confidence": 1
+      }
+    ]
+  }
+]

@@ -1,0 +1,43 @@
+{
+  "encyclopediaRevision": "synthetic-v1",
+  "taskId": "product-copy",
+  "decisionProvider": "deterministic-v1",
+  "generationProvider": "offline-preview",
+  "stateVersion": 0,
+  "overrides": {},
+  "decisions": [
+    {
+      "candidate": "brand:cup",
+      "selected": true,
+      "reason": "Explicit task ID or required entity type.",
+      "materialEffects": [
+        "identity",
+        "constraints"
+      ],
+      "confidence": 1,
+      "evidence": {
+        "signals": [
+          "explicit-id"
+        ],
+        "policy": "deterministic-v1"
+      }
+    },
+    {
+      "candidate": "brand:voice",
+      "selected": true,
+      "reason": "Explicit task ID or required entity type.",
+      "materialEffects": [
+        "identity",
+        "constraints"
+      ],
+      "confidence": 1,
+      "evidence": {
+        "signals": [
+          "relationship"
+        ],
+        "policy": "deterministic-v1"
+      }
+    }
+  ],
+  "contextBytes": 1269
+}

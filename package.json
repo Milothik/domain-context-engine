@@ -1,0 +1,22 @@
+{
+  "name": "domain-context-engine",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Turn domain knowledge into generation-ready context.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "demo": "npm run build && node examples/run.mjs",
+    "benchmark": "npm run build && node benchmarks/run.mjs"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  }
+}

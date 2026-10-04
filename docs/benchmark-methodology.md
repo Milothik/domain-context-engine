@@ -1,0 +1,3 @@
+# benchmark methodology
+
+Run npm run benchmark for four payload arms: raw prompt, raw encyclopedia dump, retrieval only, and retrieval + decision + compiler. The harness measures UTF-8 bytes, literal constraint coverage and irrelevant fixture references. These are payload diagnostics, not generated-output quality. For model evaluation, fix source/task/state revisions, model and sampling settings; repeat runs; use blind domain reviewers and explicit rubrics for identity consistency, continuity and correctness. Store actual outputs and review scores with hashes; report uncertainty, latency and cost. Output quality fields remain null until measured. Add multiple domains and adversarial contradictions before generalizing.

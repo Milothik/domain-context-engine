@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0",
+  "task": {
+    "id": "product-copy",
+    "prompt": "Write Cup product copy with Brand voice.",
+    "entityIds": [
+      "brand:cup"
+    ],
+    "tags": [
+      "BrandRule"
+    ],
+    "must": [
+      "Describe recycled steel"
+    ],
+    "mustNot": [
+      "No unsupported certification"
+    ],
+    "outputRequirements": {
+      "modality": "text",
+      "maxWords": 60
+    }
+  },
+  "entities": [
+    {
+      "@id": "brand:cup",
+      "@type": "Product",
+      "name": "Cup",
+      "attributes": {
+        "material": "recycled steel"
+      },
+      "relationships": [
+        "brand:voice"
+      ],
+      "rules": {
+        "mustPreserve": [
+          "Do not invent sustainability certifications"
+        ],
+        "mayVary": [],
+        "avoid": []
+      },
+      "provenance": [
+        {
+          "source": "synthetic-fixture-v1",
+          "type": "user-canon",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "@id": "brand:voice",
+      "@type": "BrandRule",
+      "name": "Brand voice",
+      "attributes": {
+        "tone": "plain and warm"
+      },
+      "relationships": [],
+      "rules": {
+        "mustPreserve": [
+          "Use plain language"
+        ],
+        "mayVary": [],
+        "avoid": [
+          "Unsupported performance claims"
+        ]
+      },
+      "provenance": [
+        {
+          "source": "synthetic-fixture-v1",
+          "type": "user-canon",
+          "confidence": 1
+        }
+      ]
+    }
+  ],
+  "constraints": {
+    "must": [
+      "Describe recycled steel",
+      "Do not invent sustainability certifications",
+      "Use plain language"
+    ],
+    "mustNot": [
+      "No unsupported certification",
+      "Unsupported performance claims"
+    ],
+    "may": []
+  },
+  "relationships": [
+    {
+      "from": "brand:cup",
+      "to": "brand:voice"
+    }
+  ],
+  "continuity": [],
+  "outputRequirements": {
+    "modality": "text",
+    "maxWords": 60,
+    "tone": "plain and warm"
+  }
+}

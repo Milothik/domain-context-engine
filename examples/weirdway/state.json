@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "facts": [
+    {
+      "entityId": "demo:yastrik",
+      "value": {
+        "leftSleeve": "torn",
+        "location": "demo:station"
+      },
+      "provenance": [
+        {
+          "source": "approved-page-1",
+          "type": "user-canon",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "entityId": "demo:bakery",
+      "value": {
+        "visited": true
+      },
+      "provenance": [
+        {
+          "source": "approved-history",
+          "type": "user-canon",
+          "confidence": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "@context": {
+    "demo": "https://example.org/demo/",
+    "brand": "https://example.org/brand/",
+    "name": "https://schema.org/name",
+    "attributes": {
+      "@id": "https://example.org/vocab/attributes",
+      "@type": "@json"
+    },
+    "relationships": {
+      "@id": "https://example.org/vocab/relationships",
+      "@type": "@id",
+      "@container": "@set"
+    },
+    "rules": {
+      "@id": "https://example.org/vocab/rules",
+      "@type": "@json"
+    },
+    "provenance": {
+      "@id": "https://example.org/vocab/provenance",
+      "@type": "@json"
+    }
+  }
+}

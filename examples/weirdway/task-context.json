@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "1.0",
+  "task": {
+    "id": "page-2",
+    "prompt": "Yastrik waits at the Station. The Bakery is mentioned in passing.",
+    "entityIds": [
+      "demo:yastrik",
+      "demo:station"
+    ],
+    "tags": [
+      "ComicGrammar"
+    ],
+    "must": [
+      "Preserve the left sleeve tear from page 1"
+    ],
+    "mustNot": [
+      "No new injury"
+    ],
+    "outputRequirements": {
+      "modality": "image",
+      "panels": 3,
+      "aspectRatio": "portrait"
+    }
+  },
+  "entities": [
+    {
+      "@id": "demo:grammar",
+      "@type": "ComicGrammar",
+      "name": "Comic grammar",
+      "attributes": {
+        "panels": 3,
+        "readingOrder": "left-to-right"
+      },
+      "relationships": [],
+      "rules": {
+        "mustPreserve": [
+          "Three panels; left-to-right reading"
+        ],
+        "mayVary": [],
+        "avoid": []
+      },
+      "provenance": [
+        {
+          "source": "synthetic-fixture-v1",
+          "type": "user-canon",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "@id": "demo:station",
+      "@type": "Location",
+      "name": "Station",
+      "attributes": {
+        "lighting": "blue dusk"
+      },
+      "relationships": [],
+      "rules": {
+        "mustPreserve": [
+          "Station sign remains legible"
+        ],
+        "mayVary": [],
+        "avoid": []
+      },
+      "provenance": [
+        {
+          "source": "synthetic-fixture-v1",
+          "type": "user-canon",
+          "confidence": 1
+        }
+      ]
+    },
+    {
+      "@id": "demo:yastrik",
+      "@type": "Character",
+      "name": "Yastrik",
+      "attributes": {
+        "coat": "yellow",
+        "silhouette": "angular"
+      },
+      "relationships": [
+        "demo:station"
+      ],
+      "rules": {
+        "mustPreserve": [
+          "Yastrik wears a yellow coat"
+        ],
+        "mayVary": [],
+        "avoid": []
+      },
+      "provenance": [
+        {
+          "source": "synthetic-fixture-v1",
+          "type": "user-canon",
+          "confidence": 1
+        }
+      ]
+    }
+  ],
+  "constraints": {
+    "must": [
+      "Preserve the left sleeve tear from page 1",
+      "Station sign remains legible",
+      "Three panels; left-to-right reading",
+      "Yastrik wears a yellow coat"
+    ],
+    "mustNot": [
+      "No new injury"
+    ],
+    "may": []
+  },
+  "relationships": [
+    {
+      "from": "demo:yastrik",
+      "to": "demo:station"
+    }
+  ],
+  "continuity": [
+    {
+      "entityId": "demo:yastrik",
+      "value": {
+        "leftSleeve": "torn",
+        "location": "demo:station"
+      },
+      "provenance": [
+        {
+          "source": "approved-page-1",
+          "type": "user-canon",
+          "confidence": 1
+        }
+      ]
+    }
+  ],
+  "outputRequirements": {
+    "modality": "image",
+    "panels": 3,
+    "aspectRatio": "portrait"
+  }
+}

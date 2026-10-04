@@ -1,0 +1,102 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "project-intake",
+  "type": "object",
+  "required": [
+    "projectName",
+    "domain",
+    "primaryOutput",
+    "sourceMaterials",
+    "hardConstraints",
+    "continuityRequired"
+  ],
+  "properties": {
+    "projectName": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string"
+    },
+    "primaryOutput": {
+      "type": "string"
+    },
+    "sourceMaterials": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "source",
+          "classification"
+        ],
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "classification": {
+            "enum": [
+              "canonical",
+              "reference",
+              "historical",
+              "optional",
+              "contradictory",
+              "unknown-reliability"
+            ]
+          },
+          "locator": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "canonicalSources": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "entityTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "hardConstraints": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "continuityRequired": {
+      "type": "boolean"
+    },
+    "generationModel": {
+      "type": "string"
+    },
+    "availableAPIs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "deploymentEnvironment": {
+      "type": "string"
+    },
+    "expectedScale": {
+      "type": "object"
+    },
+    "privacyRequirements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "unresolvedContradictions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}

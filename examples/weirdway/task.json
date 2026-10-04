@@ -1,0 +1,22 @@
+{
+  "id": "page-2",
+  "prompt": "Yastrik waits at the Station. The Bakery is mentioned in passing.",
+  "entityIds": [
+    "demo:yastrik",
+    "demo:station"
+  ],
+  "tags": [
+    "ComicGrammar"
+  ],
+  "must": [
+    "Preserve the left sleeve tear from page 1"
+  ],
+  "mustNot": [
+    "No new injury"
+  ],
+  "outputRequirements": {
+    "modality": "image",
+    "panels": 3,
+    "aspectRatio": "portrait"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "product-copy",
+  "prompt": "Write Cup product copy with Brand voice.",
+  "entityIds": [
+    "brand:cup"
+  ],
+  "tags": [
+    "BrandRule"
+  ],
+  "must": [
+    "Describe recycled steel"
+  ],
+  "mustNot": [
+    "No unsupported certification"
+  ],
+  "outputRequirements": {
+    "modality": "text",
+    "maxWords": 60
+  }
+}

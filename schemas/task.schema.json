@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "task",
+  "type": "object",
+  "required": [
+    "id",
+    "prompt",
+    "entityIds",
+    "tags",
+    "must",
+    "mustNot",
+    "outputRequirements"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "entityIds": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "must": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "mustNot": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "outputRequirements": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}

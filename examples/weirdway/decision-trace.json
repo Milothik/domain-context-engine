@@ -1,0 +1,72 @@
+{
+  "encyclopediaRevision": "synthetic-v1",
+  "taskId": "page-2",
+  "decisionProvider": "deterministic-v1",
+  "generationProvider": "offline-preview",
+  "stateVersion": 1,
+  "overrides": {},
+  "decisions": [
+    {
+      "candidate": "demo:bakery",
+      "selected": false,
+      "reason": "Discovered association has no explicit material effect under this policy.",
+      "materialEffects": [],
+      "confidence": 1,
+      "evidence": {
+        "signals": [
+          "lexical-or-type"
+        ],
+        "policy": "deterministic-v1"
+      }
+    },
+    {
+      "candidate": "demo:grammar",
+      "selected": true,
+      "reason": "Explicit task ID or required entity type.",
+      "materialEffects": [
+        "identity",
+        "constraints"
+      ],
+      "confidence": 1,
+      "evidence": {
+        "signals": [
+          "lexical-or-type"
+        ],
+        "policy": "deterministic-v1"
+      }
+    },
+    {
+      "candidate": "demo:station",
+      "selected": true,
+      "reason": "Explicit task ID or required entity type.",
+      "materialEffects": [
+        "identity",
+        "constraints"
+      ],
+      "confidence": 1,
+      "evidence": {
+        "signals": [
+          "explicit-id"
+        ],
+        "policy": "deterministic-v1"
+      }
+    },
+    {
+      "candidate": "demo:yastrik",
+      "selected": true,
+      "reason": "Explicit task ID or required entity type.",
+      "materialEffects": [
+        "identity",
+        "constraints"
+      ],
+      "confidence": 1,
+      "evidence": {
+        "signals": [
+          "explicit-id"
+        ],
+        "policy": "deterministic-v1"
+      }
+    }
+  ],
+  "contextBytes": 1798
+}
