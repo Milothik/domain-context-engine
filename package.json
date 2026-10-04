@@ -2,6 +2,7 @@
   "name": "domain-context-engine",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "Turn domain knowledge into generation-ready context.",
   "engines": {
